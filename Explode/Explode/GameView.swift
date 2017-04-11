@@ -8,8 +8,8 @@
 
 import Foundation
 
-let numberOfRow = 8
-let numberOfColumns = 8
+let numberOfRow = 12
+let numberOfColumns = 12
 
 
 struct SquareImage {
@@ -48,8 +48,45 @@ class GameView: UIView {
   
   func squareDidClicked(sender: UIButton){
     guard let squareBtn = sender as? SquareButton else { return }
-    SoundManager.sharedInstance.playGlassBreak()
-    squareBtn.destroySelf()
+    
+    destoryBtn(row: squareBtn.row, column: squareBtn.column, iconId: squareBtn.iconId)
+    
+  }
+  
+  func destoryBtn(row: Int, column: Int, iconId: Int) {
+    guard row >= 0 && column >= 0 else {  return }
+
+    guard let btn = findBtn(with: row, column: column, iconId: iconId) else { return }
+    btn.destroySelf()
+    removeBtn(with: row, column: column)
+    
+    let deadlineTime = DispatchTime.now() + .microseconds(1000)
+    DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+      self.destoryBtn(row: row - 1, column: column, iconId: iconId)
+      self.destoryBtn(row: row, column: column - 1, iconId: iconId)
+      self.destoryBtn(row: row + 1, column: column, iconId: iconId)
+      self.destoryBtn(row: row, column: column + 1, iconId: iconId)
+    }
+  }
+  
+  func findBtn(with row: Int, column: Int, iconId: Int) -> SquareButton? {
+    guard row >= 0 && column >= 0 else {  return nil }
+    for one in squareViews {
+      if one.row == row && one.column == column && one.iconId == iconId {
+        return one
+      }
+    }
+    return nil
+  }
+  
+  func removeBtn(with row: Int, column: Int) {
+    var tmp:[SquareButton] = []
+    for one in squareViews {
+      if one.row != row || one.column != column {
+        tmp.append(one)
+      }
+    }
+    squareViews = tmp
   }
   
   required init?(coder aDecoder: NSCoder) {

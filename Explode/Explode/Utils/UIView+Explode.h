@@ -13,10 +13,11 @@
 
 typedef void(^ExplodeCompletion)(void);
 
-@interface UIView (Explode)
+@interface UIView (Explode) <CAAnimationDelegate>
 
 @property (nonatomic, copy) ExplodeCompletion completionCallback;
- 
-- (void)lp_explodeWithCallback:(ExplodeCompletion)callback;
+@property (nonatomic, strong) UIImage *explodeImage;
+
+- (void)lp_explodeWithImage:(UIImage *)explodeImage callback:(ExplodeCompletion)callback;
 
 @end

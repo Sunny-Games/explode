@@ -15,10 +15,10 @@
 
 @end
 
-
 @implementation UIView (Explode)
 
 @dynamic completionCallback;
+@dynamic explodeImage;
 
 - (void)setCompletionCallback:(ExplodeCompletion)completionCallback
 {
@@ -52,7 +52,7 @@ float randomFloat()
   return outputImage;
 }
 
-- (void)lp_explodeWithCallback:(ExplodeCompletion)callback
+- (void)lp_explodeWithImage:(UIImage *)explodeImage callback:(ExplodeCompletion)callback;
 {
   self.userInteractionEnabled = NO;
   
@@ -60,6 +60,8 @@ float randomFloat()
   {
     self.completionCallback = callback;
   }
+  
+  // self.explodeImage = explodeImage;
   
   float size = self.frame.size.width / 2;
   CGSize imageSize = CGSizeMake(size, size);
@@ -109,7 +111,12 @@ float randomFloat()
       
       CGRect layerRect = (CGRect){{x * imageSize.width, y * imageSize.height}, tileSize};
       
-      CGImageRef tileImage = CGImageCreateWithImageInRect(fullImage, layerRect);
+      CGImageRef tileImage;
+      if (explodeImage != nil) {
+        tileImage = explodeImage.CGImage;
+      }else{
+        tileImage = CGImageCreateWithImageInRect(fullImage, layerRect);
+      }
       
       LPParticleLayer *layer = [LPParticleLayer layer];
       layer.frame = layerRect;
@@ -119,7 +126,9 @@ float randomFloat()
       layer.particlePath = [self pathForLayer: layer parentRect: originalFrame];
       [self.layer addSublayer:layer];
       
-      CGImageRelease(tileImage);
+      if (explodeImage == nil) {
+        CGImageRelease(tileImage);
+      }
     }
   }
   
@@ -161,24 +170,19 @@ float randomFloat()
     [layer addAnimation:animGroup forKey:nil];
     
     //take it off screen
-    [layer setPosition:CGPointMake(0, -200)];
+    [layer setPosition:CGPointMake(-1000, 0)];
   }];
 }
 
-- (void)lp_explode
-{
-  [self lp_explodeWithCallback:nil];
-}
-
-
-- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
-{
-  LPParticleLayer *layer = [theAnimation valueForKey:@"animationLayer"];
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+  //  return;
+  
+  LPParticleLayer *layer = [anim valueForKey:@"animationLayer"];
   
   if (layer)
   {
     //make sure we dont have any more
-    if ([[self.layer sublayers] count]==1)
+    if ([[layer sublayers] count]==1)
     {
       if (self.completionCallback)
       {
@@ -209,25 +213,26 @@ float randomFloat()
   
   float maxLeftRightShift = 1.f * randomFloat();
   
-  CGFloat layerYPosAndHeight = - self.superview.frame.size.height * randomFloat() / 2;
+  CGFloat layerYPosAndHeight = 0;//- self.superview.frame.size.height * randomFloat() / 2;
   
-  float endY = self.superview.frame.size.height;
-
+  float endY = self.superview.frame.size.height * 2 - self.frame.origin.y;
+  
   if (layer.position.x <= rect.size.width * 0.5)
   {
-    CGFloat oX = self.frame.origin.x * randomFloat() * randomFloat() - self.superview.frame.size.width / 2;
-
+    CGFloat oX = self.frame.origin.x * randomFloat() * randomFloat() - self.superview.frame.size.width / 1.5;
+    
     endPoint = CGPointMake(oX, endY);
     curvePoint= CGPointMake(oX * upOrDown * randomFloat(), layerYPosAndHeight);
   }
   else
   {
     float rightToSuper = (self.superview.frame.size.width - self.frame.origin.x - self.frame.size.width) * maxLeftRightShift * r3;
-
+    
     endPoint = CGPointMake(self.frame.origin.x + self.frame.size.width + rightToSuper, endY);
     curvePoint= CGPointMake(self.frame.origin.x + self.frame.size.width + rightToSuper * randomFloat(), layerYPosAndHeight);
   }
   
+  NSLog(@"layerYPosAndHeight is %f", layerYPosAndHeight);
   [particlePath addQuadCurveToPoint:endPoint
                        controlPoint:curvePoint];
   

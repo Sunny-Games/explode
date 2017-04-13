@@ -25,6 +25,19 @@ struct SquareImage {
       return UIImage(named: "Square_Red")
     }
   }
+  
+  static func getExpodeImageWithId(id: Int) -> UIImage? {
+    switch id {
+    case 0:
+      return UIImage(named: "WaterDrop_Blue")
+    case 1:
+      return UIImage(named: "WaterDrop_Green")
+    case 2:
+      return UIImage(named: "WaterDrop_Yellow")
+    default:
+      return UIImage(named: "WaterDrop_Red")
+    }
+  }
 }
 
 
@@ -38,7 +51,7 @@ class GameView: UIView {
       for oneCol in 0...numberOfColumns - 1 {
         let iconId = Int(arc4random_uniform(4))
         
-        let oneSquare = SquareButton(iconId: iconId, image: SquareImage.getImageWithId(id: iconId), row: oneRow, column: oneCol)
+        let oneSquare = SquareButton(iconId: iconId, image: SquareImage.getImageWithId(id: iconId), explodeImage: SquareImage.getExpodeImageWithId(id: iconId), row: oneRow, column: oneCol)
         squareViews.append(oneSquare)
         addSubview(oneSquare)
         oneSquare.addTarget(self, action: #selector(squareDidClicked(sender:)), for: .touchUpInside)
@@ -61,13 +74,13 @@ class GameView: UIView {
     btn.destroySelf()
     removeBtn(with: row, column: column)
     
-//    let deadlineTime = DispatchTime.now() + .milliseconds(100)
-//    DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-//      self.destoryBtn(row: row - 1, column: column, iconId: iconId)
-//      self.destoryBtn(row: row, column: column - 1, iconId: iconId)
-//      self.destoryBtn(row: row + 1, column: column, iconId: iconId)
-//      self.destoryBtn(row: row, column: column + 1, iconId: iconId)
-//    }
+    let deadlineTime = DispatchTime.now() + .milliseconds(100)
+    DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+      self.destoryBtn(row: row - 1, column: column, iconId: iconId)
+      self.destoryBtn(row: row, column: column - 1, iconId: iconId)
+      self.destoryBtn(row: row + 1, column: column, iconId: iconId)
+      self.destoryBtn(row: row, column: column + 1, iconId: iconId)
+    }
   }
   
   func findBtn(with row: Int, column: Int, iconId: Int) -> SquareButton? {

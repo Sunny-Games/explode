@@ -8,16 +8,17 @@
 
 import Foundation
 
-
 class SquareButton: UIButton {
   let iconId: Int
+  let explodeImg: UIImage?
   let row: Int
   let column: Int
   
-  init(iconId: Int, image: UIImage?, row: Int, column: Int) {
+  init(iconId: Int, image: UIImage?, explodeImage: UIImage?, row: Int, column: Int) {
     self.iconId = iconId
     self.row = row
     self.column = column
+    self.explodeImg = explodeImage
     
     super.init(frame: CGRect.zero)
     
@@ -25,7 +26,7 @@ class SquareButton: UIButton {
   }
   
   func destroySelf() {
-    self.lp_explode(callback: nil)
+    self.lp_explode(with: explodeImg, callback: nil)
     SoundManager.sharedInstance.playGlassBreak()
   }
   

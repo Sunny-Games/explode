@@ -27,7 +27,7 @@ class SquareButton: UIButton {
   
   func destroySelf() {
     self.lp_explode(with: explodeImg, callback: nil)
-    SoundManager.sharedInstance.playGlassBreak()
+    SoundManager.sharedInstance.playBallonSplashBreak()
   }
   
   required init?(coder aDecoder: NSCoder) {

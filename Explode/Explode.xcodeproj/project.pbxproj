@@ -19,6 +19,7 @@
 		C9E5EB541E9CFC72009D8675 /* explode.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9E5EB531E9CFC72009D8675 /* explode.wav */; };
 		C9E5EB561E9CFC8C009D8675 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E5EB551E9CFC8C009D8675 /* SoundManager.swift */; };
 		C9E5EB581E9CFFDB009D8675 /* glass_break.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C9E5EB571E9CFFDB009D8675 /* glass_break.mp3 */; };
+		C9E5EB5C1E9F5730009D8675 /* ballon_splash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C9E5EB5B1E9F5730009D8675 /* ballon_splash.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		C9E5EB531E9CFC72009D8675 /* explode.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explode.wav; sourceTree = "<group>"; };
 		C9E5EB551E9CFC8C009D8675 /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		C9E5EB571E9CFFDB009D8675 /* glass_break.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = glass_break.mp3; sourceTree = "<group>"; };
+		C9E5EB5B1E9F5730009D8675 /* ballon_splash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ballon_splash.mp3; sourceTree = "<group>"; };
 		E545E2471C86FA5FF90257E5 /* Pods-Explode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Explode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Explode/Pods-Explode.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +121,7 @@
 			children = (
 				C9E5EB531E9CFC72009D8675 /* explode.wav */,
 				C9E5EB571E9CFFDB009D8675 /* glass_break.mp3 */,
+				C9E5EB5B1E9F5730009D8675 /* ballon_splash.mp3 */,
 				C9E5EB3B1E9B8B34009D8675 /* Info.plist */,
 				C9E5EB381E9B8B34009D8675 /* LaunchScreen.storyboard */,
 				C9E5EB4B1E9CBEBC009D8675 /* Assets.xcassets */,
@@ -192,6 +195,7 @@
 			files = (
 				C9E5EB3A1E9B8B34009D8675 /* LaunchScreen.storyboard in Resources */,
 				C9E5EB541E9CFC72009D8675 /* explode.wav in Resources */,
+				C9E5EB5C1E9F5730009D8675 /* ballon_splash.mp3 in Resources */,
 				C9E5EB4C1E9CBEBC009D8675 /* Assets.xcassets in Resources */,
 				C9E5EB581E9CFFDB009D8675 /* glass_break.mp3 in Resources */,
 			);

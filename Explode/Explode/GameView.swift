@@ -62,7 +62,7 @@ class GameView: UIView {
   func squareDidClicked(sender: UIButton){
     guard let squareBtn = sender as? SquareButton else { return }
     
-    SoundManager.sharedInstance.resetGlassBreak()
+    SoundManager.sharedInstance.resetBallonSplashBreak()
     destoryBtn(row: squareBtn.row, column: squareBtn.column, iconId: squareBtn.iconId)
     
   }

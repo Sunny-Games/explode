@@ -34,10 +34,13 @@ class SoundManager: NSObject {
     
   }
   
-  
-  func playGlassBreak(){
+  func resetGlassBreak() {
     guard let glassSound = glassBreakSound else { return }
     glassSound.currentTime = 0
+  }
+  
+  func playGlassBreak() {
+    guard let glassSound = glassBreakSound else { return }
     glassSound.play()
   }
   

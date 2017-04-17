@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>BAFluidView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Explode.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2DCF3FA0C54655D9D360D82897E81599</key>
+		<key>41804C3F7B422752ED4744DAA6DB60C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FCFDE0D5F177A2744094682C8AA847AC</key>
+		<key>58A3C9787D23099AD51C74FF66F57A86</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BB80491C929BCA1563207DBB0E297B07</key>
 		<dict>
 			<key>primary</key>
 			<true/>

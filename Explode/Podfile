@@ -7,5 +7,5 @@ target 'Explode' do
 
   # Pods for Explode
   pod 'SnapKit'      		 , '~> 3.2.0'
-
+  pod "BAFluidView"
 end

@@ -10,23 +10,24 @@ import Foundation
 
 class SquareButton: UIButton {
   let iconId: Int
-  let explodeImg: UIImage?
+  var explodeImg: UIImage?
   let row: Int
   let column: Int
   
-  init(iconId: Int, image: UIImage?, explodeImage: UIImage?, row: Int, column: Int) {
+  init(iconId: Int, color: UIColor, row: Int, column: Int) {
     self.iconId = iconId
     self.row = row
     self.column = column
-    self.explodeImg = explodeImage
+    //self.explodeImg = explodeImage
     
     super.init(frame: CGRect.zero)
     
-    setImage(image, for: .normal)
+    backgroundColor = color
+    //explodeImg = UIImage()
   }
   
-  func destroySelf() {
-    self.lp_explode(with: explodeImg, callback: nil)
+  func destroySelf(callback: ExplodeCompletion? = nil) {
+    self.lp_explode(with: explodeImg, callback: callback)
     SoundManager.sharedInstance.playBallonSplashBreak()
   }
   

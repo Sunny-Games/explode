@@ -7,14 +7,16 @@
 //
 
 import UIKit
-import BAFluidView
 
 class WaterView: BAFluidView {
+  static let shared = WaterView(frame: CGRect(x: 0, y: 500, width: 100, height: 100))
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
-    
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
   }
   
   required init?(coder aDecoder: NSCoder) {

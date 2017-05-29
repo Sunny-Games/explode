@@ -10,7 +10,6 @@ import SnapKit
 
 class MainViewController: UIViewController {
   let gameView = GameView()
-  var waterView: WaterView?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -32,26 +31,12 @@ class MainViewController: UIViewController {
     }
     
     view.addSubview(gameView)
+    gameView.snp.makeConstraints{ make in
+      make.left.right.width.equalTo(self.view)
+      make.top.equalTo(100)
+    }
     
-    waterView = WaterView(frame: CGRect(x: 0, y: 400, width: view.frame.size.width, height: 100))
-    waterView!.fill(to: 1)
-    waterView!.fillColor = UIColor.yellow
-    view.addSubview(waterView!)
-    waterView!.startAnimation()
   }
   
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    
-    var gameFrame = gameView.frame
-    gameFrame.origin.x = 0
-    gameFrame.origin.y = 120
-    gameFrame.size.width = view.frame.size.width
-    gameFrame.size.height = view.frame.size.width
-    gameView.frame = gameFrame
-    
-    if let wv = waterView {
-      wv.frame.origin.y = self.view.frame.size.height - wv.frame.size.height
-    }
-  }
+  
 }
